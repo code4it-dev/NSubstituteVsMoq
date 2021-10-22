@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 
 namespace Core
 {
@@ -18,18 +17,12 @@ namespace Core
             => _stringUtility = stringUtility;
 
         public string[] TransformArray(string[] items)
-        {
-            return _stringUtility.TransformAll(items);
-        }
+            => _stringUtility.TransformAll(items);
 
         public string[] TransformSingleItems(string[] items)
-        {
-            return items.Select(i => _stringUtility.Transform(i)).ToArray();
-        }
+            => items.Select(i => _stringUtility.Transform(i)).ToArray();
 
         public string TransformString(string originalString)
-        {
-            return _stringUtility.Transform(originalString);
-        }
+            => _stringUtility.Transform(originalString);
     }
 }

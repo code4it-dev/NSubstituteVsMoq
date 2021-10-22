@@ -19,16 +19,17 @@ namespace Tests
         [SetUp]
         public void Setup()
         {
-            moqMock.Reset();
+            moqMock.Invocations.Clear();
         }
 
         [Test]
         public override void TransformArray_Should_ThrowException_When_ArrayIsNull()
         {
-            moqMock.Setup(_ => _.TransformAll((string[])null))
-             .Throws<ArgumentException>();
+            var myException = new ArgumentException("My message");
+            moqMock.Setup(_ => _.TransformAll(null)).Throws(myException);
+            //moqMock.Setup(_ => _.TransformAll(null)).Throws<ArgumentException>();
 
-            Assert.Throws<ArgumentException>(() => sut.TransformArray((string[])null));
+            Assert.Throws<ArgumentException>(() => sut.TransformArray(null));
         }
 
         [Test]
@@ -58,10 +59,9 @@ namespace Tests
                 .Returns("transformed");
 
             //Act
-            string newString = sut.TransformString("hello");
+            _ = sut.TransformString("hello");
 
             //Assert
-
             moqMock.Verify(_ => _.Transform("hello"));
         }
 

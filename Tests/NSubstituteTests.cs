@@ -26,10 +26,12 @@ namespace Tests
         [Test]
         public override void TransformArray_Should_ThrowException_When_ArrayIsNull()
         {
-            nSubsMock.TransformAll((string[])null)
-             .Throws(new ArgumentException());
+            var myException = new ArgumentException("My message");
 
-            Assert.Throws<ArgumentException>(() => sut.TransformArray((string[])null));
+            nSubsMock.TransformAll(null).Throws(myException);
+            //nSubsMock.TransformAll(null).Throws<ArgumentException>();
+
+            Assert.Throws<ArgumentException>(() => sut.TransformArray(null));
         }
 
         [Test]
@@ -59,7 +61,7 @@ namespace Tests
                 .Returns("transformed");
 
             //Act
-            string newString = sut.TransformString("hello");
+            _ = sut.TransformString("hello");
 
             //Assert
 
